@@ -41,7 +41,7 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
         this.props.onSetModAttribute(gameMode, mod.id, 'notes', newNote);
       });
       return null;
-    }, 500);
+    }, 5000);
   }
 
   public componentWillReceiveProps(newProps: IProps) {
