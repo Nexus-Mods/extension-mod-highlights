@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { actions, ComponentEx, Icon, selectors, tooltip, types, util } from 'vortex-api';
+import { actions, ComponentEx, types, util } from 'vortex-api';
 
 export interface IBaseProps {
   mods: types.IMod[];
@@ -38,7 +38,7 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
     this.mDebouncer = new util.Debouncer((newNote: string) => {
       const { gameMode, mods, onSetModAttribute } = this.props;
       mods.forEach(mod => {
-        this.props.onSetModAttribute(gameMode, mod.id, 'notes', newNote);
+        onSetModAttribute(gameMode, mod.id, 'notes', newNote);
       });
       return null;
     }, 5000);
@@ -49,6 +49,10 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
     if (newValue !== this.state.valueCache) {
       this.nextState.valueCache = newValue;
     }
+  }
+
+  public componentWillUnmount() {
+    this.mDebouncer.runNow(undefined, this.state.valueCache);
   }
 
   public shouldComponentUpdate(nextProps: IProps, nextState: IComponentState) {
@@ -83,8 +87,6 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
   }
 
   private handleChange = (event) => {
-    const {gameMode, onSetModAttribute } = this.props;
-
     const newValue = event.currentTarget.value;
 
     this.nextState.valueCache = newValue;
