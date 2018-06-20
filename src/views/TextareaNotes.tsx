@@ -65,6 +65,10 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
     const { t, mods } = this.props;
     const { valueCache } = this.state;
 
+    if (mods.find(iter => iter.state !== 'installed') !== undefined) {
+      return null;
+    }
+
     return (
       <textarea
         value={valueCache !== null ? valueCache : ''}
