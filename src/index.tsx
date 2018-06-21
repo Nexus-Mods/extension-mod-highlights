@@ -1,7 +1,6 @@
 import HighlightButton from './views/HighlightButton';
 import TextareaNotes from './views/TextareaNotes';
 
-import * as I18next from 'i18next';
 import * as path from 'path';
 import * as React from 'react';
 import { selectors, types, util } from 'vortex-api';
@@ -13,11 +12,11 @@ function init(context: types.IExtensionContext) {
     icon: 'sticky-note',
     placement: 'detail',
     supportsMultiple: true,
-    customRenderer: (mods, detailCell, t) => {
+    customRenderer: (mods: types.IMod[]) => {
       const gameMode = selectors.activeGameId(context.api.store.getState());
       return (<TextareaNotes gameMode={gameMode} mods={mods} />);
     },
-    calc: (mod) => util.getSafe(mod.attributes, ['notes'], ''),
+    calc: (mod: types.IMod) => util.getSafe(mod.attributes, ['notes'], ''),
     isToggleable: false,
     edit: {},
     isSortable: false,
@@ -29,8 +28,7 @@ function init(context: types.IExtensionContext) {
     description: 'Mod Highlight',
     icon: 'lightbulb-o',
     placement: 'table',
-    customRenderer: (mod: types.IMod, detailCell: boolean, t: I18next.TranslationFunction) =>
-      <HighlightButton mod={mod} />,
+    customRenderer: (mod: types.IMod) => <HighlightButton mod={mod} />,
     calc: (mod: types.IMod) =>
       util.getSafe(mod.attributes, ['icon'], '')
       + ' - ' + util.getSafe(mod.attributes, ['color'], ''),
@@ -41,8 +39,7 @@ function init(context: types.IExtensionContext) {
   });
 
   context.once(() => {
-    context.api.setStylesheet('mod-highlight',
-                              path.join(__dirname, 'mod-highlight.scss'));
+    context.api.setStylesheet('mod-highlight', path.join(__dirname, 'mod-highlight.scss'));
   });
 
   return true;
