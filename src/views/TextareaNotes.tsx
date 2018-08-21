@@ -2,6 +2,7 @@ import * as React from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { actions, ComponentEx, types, util } from 'vortex-api';
+import { ThunkDispatch } from 'redux-thunk';
 
 export interface IBaseProps {
   mods: types.IMod[];
@@ -102,7 +103,7 @@ function mapStateToProps(state: types.IState): IConnectedProps {
   return {};
 }
 
-function mapDispatchToProps(dispatch: Redux.Dispatch<any>): IActionProps {
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, any>): IActionProps {
   return {
     onSetModAttribute: (gameMode: string, modId: string, attributeId: string, value: any) => {
       dispatch(actions.setModAttribute(gameMode, modId, attributeId, value));

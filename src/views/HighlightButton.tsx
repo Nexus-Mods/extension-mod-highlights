@@ -3,6 +3,7 @@ import { Button, ControlLabel, FormGroup, Overlay, Popover } from 'react-bootstr
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { actions, ComponentEx, Icon, selectors, tooltip, types, util } from 'vortex-api';
+import { ThunkDispatch } from 'redux-thunk';
 
 const cssHighlightList: string[] = [
   'highlight-1',
@@ -168,7 +169,7 @@ function mapStateToProps(state: types.IState): IConnectedProps {
   };
 }
 
-function mapDispatchToProps(dispatch: Redux.Dispatch<any>): IActionProps {
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, any>): IActionProps {
   return {
     onSetModAttribute: (gameMode: string, modId: string, attributeId: string, value: any) => {
       dispatch(actions.setModAttribute(gameMode, modId, attributeId, value));
