@@ -53,7 +53,9 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
   }
 
   public componentWillUnmount() {
-    this.mDebouncer.runNow(undefined, this.state.valueCache);
+    if (this.state.valueCache !== this.getValue(this.props)) {
+      this.mDebouncer.runNow(undefined, this.state.valueCache);
+    }
   }
 
   public shouldComponentUpdate(nextProps: IProps, nextState: IComponentState) {
