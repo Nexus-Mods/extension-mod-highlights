@@ -1,64 +1,19 @@
 .highlight-base {
   padding: 1px 5px;
   border: 0px;
+  stroke: black;
+  stroke-width: 1.5px;
   &:hover, &:active, &:focus {
     color: $link-hover-color;
   }
 }
 
-.highlight-1 {
-  background-color: $highlight1;
-  &:hover, &:active, &:focus {
-    background-color: $highlight1;
-  }
-}
-
-.highlight-2 {
-  background-color: $highlight2;
-  &:hover, &:active, &:focus {
-    background-color: $highlight2;
-  }
-}
-
-.highlight-3 {
-  background-color: $highlight3;
-  &:hover, &:active, &:focus {
-    background-color: $highlight3;
-  }
-}
-
-.highlight-4 {
-  background-color: $highlight4;
-  &:hover, &:active, &:focus {
-    background-color: $highlight4;
-  }
-}
-
-.highlight-5 {
-  background-color: $highlight5;
-  &:hover, &:active, &:focus {
-    background-color: $highlight5;
-  }
-}
-
-.highlight-6 {
-  background-color: $highlight6;
-  &:hover, &:active, &:focus {
-    background-color: $highlight6;
-  }
-}
-
-.highlight-7 {
-  background-color: $highlight7;
-  &:hover, &:active, &:focus {
-    background-color: $highlight7;
-  }
-}
-
-.highlight-8 {
-  background-color: $highlight8;
-  &:hover, &:active, &:focus {
-    background-color: $highlight8;
+@each $hl in $highlight-list {
+  .highlight-#{nth($hl, 1)} {
+    background-color: nth($hl, 2);
+    &:hover, &:active, &:focus {
+      background-color: nth($hl, 2);
+    }
   }
 }
 
