@@ -61,12 +61,15 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
 
     const modIcon: string[] = [
       'highlight-conflict',
+      'highlight-patch',
       'highlight-shield',
       'highlight-map',
       'highlight-lab',
       'highlight-flag',
       'highlight-temple',
       'highlight-home',
+      'highlight-person',
+      'highlight-visuals',
       'highlight'];
 
     const popoverBottom = (
