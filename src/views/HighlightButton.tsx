@@ -72,7 +72,7 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
       'highlight-visuals',
       'highlight'];
 
-    const popoverBottom = (
+    const popoverBottom = this.state.showOverlay ? (
       <Popover
         id='popover-highlight-settings'
         title={t('Highlight Settings')}
@@ -92,19 +92,21 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
           </div>
         </FormGroup>
       </Popover>
-    );
+    ) : null;
 
     return (
       <div style={{ textAlign: 'center' }}>
-        <Overlay
-          rootClose
-          placement='bottom'
-          onHide={this.toggleOverlay}
-          show={this.state.showOverlay}
-          target={this.mRef as any}
-        >
-          {popoverBottom}
-        </Overlay>
+        {this.state.showOverlay ? (
+          <Overlay
+            rootClose
+            placement='bottom'
+            onHide={this.toggleOverlay}
+            show={this.state.showOverlay}
+            target={this.mRef as any}
+          >
+            {popoverBottom}
+          </Overlay>
+        ) : null}
         <tooltip.IconButton
           ref={this.setRef}
           className={'highlight-base ' + (color !== '' ? color : 'highlight-default')}
