@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { actions, ComponentEx, types, util } from 'vortex-api';
 import { ThunkDispatch } from 'redux-thunk';
@@ -114,6 +114,6 @@ function mapDispatchToProps(dispatch: ThunkDispatch<any, any, any>): IActionProp
 }
 
 export default
-translate(['common'], { wait: false })(
+withTranslation(['common'])(
   connect(mapStateToProps, mapDispatchToProps)(
-    TextareaNotes)) as React.ComponentClass<IBaseProps>;
+    TextareaNotes) as any) as React.ComponentClass<IBaseProps>;

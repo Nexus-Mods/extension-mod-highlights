@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, ControlLabel, FormGroup, Overlay, Popover } from 'react-bootstrap';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { actions, ComponentEx, Icon, selectors, tooltip, types, util } from 'vortex-api';
 import { ThunkDispatch } from 'redux-thunk';
@@ -183,6 +183,6 @@ function mapDispatchToProps(dispatch: ThunkDispatch<any, any, any>): IActionProp
 }
 
 export default
-translate(['common'], { wait: false })(
-  connect(mapStateToProps, mapDispatchToProps)(
-    HighlightButton)) as React.ComponentClass<IBaseProps>;
+  withTranslation(['common'])(
+    connect(mapStateToProps, mapDispatchToProps)(
+      HighlightButton) as any) as React.ComponentClass<IBaseProps>;
