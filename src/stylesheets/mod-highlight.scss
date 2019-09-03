@@ -35,3 +35,9 @@
   min-height: 100px;
   resize: none;
 }
+
+.highlight-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
