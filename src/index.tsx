@@ -32,14 +32,17 @@ function init(context: types.IExtensionContext) {
       const note = util.getSafe(mod.attributes, ['notes'], undefined);
       return (
         <div className='highlight-container'>
-          {note !== undefined ? <tooltip.Icon tooltip={note} name='changelog' /> : null}
+          {((note !== undefined) && (note.length > 0))
+            ? <tooltip.Icon tooltip={note} name='changelog' />
+            : null}
           <HighlightButton mod={mod} />
         </div>
       );
     },
     calc: (mod: types.IMod) =>
       util.getSafe(mod.attributes, ['icon'], '')
-      + ' - ' + util.getSafe(mod.attributes, ['color'], ''),
+      + ' - ' + util.getSafe(mod.attributes, ['color'], '')
+      + ' - ' + util.getSafe(mod.attributes, ['notes'], ''),
     isToggleable: true,
     edit: {},
     isSortable: true,
