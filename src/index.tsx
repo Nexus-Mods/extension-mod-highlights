@@ -32,7 +32,7 @@ function init(context: types.IExtensionContext) {
       const note = util.getSafe(mod.attributes, ['notes'], undefined);
       return (
         <div className='highlight-container'>
-          {((note !== undefined) && (note.length > 0))
+          {(!!note && (note.length > 0))
             ? <tooltip.Icon tooltip={note} name='changelog' />
             : null}
           <HighlightButton mod={mod} />
