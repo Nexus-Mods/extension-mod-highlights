@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Button, ControlLabel, FormGroup, Overlay, Popover } from 'react-bootstrap';
+import * as ReactDOM from 'react-dom';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { actions, ComponentEx, Icon, selectors, tooltip, types, util } from 'vortex-api';
 import { ThunkDispatch } from 'redux-thunk';
+import { actions, ComponentEx, Icon, selectors, tooltip, types, util } from 'vortex-api';
 
 const cssHighlightList: string[] = [
   'highlight-1',
@@ -33,6 +34,7 @@ type IProps = IBaseProps & IConnectedProps & IActionProps;
 
 interface IComponentState {
   showOverlay: boolean;
+  up: boolean;
 }
 
 /**
@@ -46,7 +48,7 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
   constructor(props: IProps) {
     super(props);
 
-    this.initState({ showOverlay: false });
+    this.initState({ showOverlay: false, up: false });
   }
 
   public render(): JSX.Element {
@@ -99,7 +101,7 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
         {this.state.showOverlay ? (
           <Overlay
             rootClose
-            placement='bottom'
+            placement={this.state.up ? 'top' : 'bottom'}
             onHide={this.toggleOverlay}
             show={this.state.showOverlay}
             target={this.mRef as any}
@@ -163,8 +165,23 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
     this.mRef = ref;
   }
 
+  private get bounds(): ClientRect {
+    return {
+      top: 0,
+      left: 0,
+      bottom: window.innerHeight,
+      right: window.innerWidth,
+      height: window.innerHeight,
+      width: window.innerWidth,
+    };
+  }
+
   private toggleOverlay = () => {
     this.nextState.showOverlay = !this.state.showOverlay;
+    const node = ReactDOM.findDOMNode(this.mRef) as Element;
+    const bounds = this.bounds;
+    this.nextState.up =
+      node.getBoundingClientRect().bottom > ((bounds.top + bounds.height) * 2 / 3);
   }
 }
 
