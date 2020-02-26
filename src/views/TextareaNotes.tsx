@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { actions, ComponentEx, types, util } from 'vortex-api';
 import { ThunkDispatch } from 'redux-thunk';
+import { actions, ComponentEx, types, util } from 'vortex-api';
 
 export interface IBaseProps {
   mods: types.IMod[];
@@ -45,7 +45,7 @@ class TextareaNotes extends ComponentEx<IProps, IComponentState> {
     }, 5000);
   }
 
-  public componentWillReceiveProps(newProps: IProps) {
+  public UNSAFE_componentWillReceiveProps(newProps: IProps) {
     const newValue = this.getValue(newProps);
     if (newValue !== this.state.valueCache) {
       this.nextState.valueCache = newValue;
