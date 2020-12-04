@@ -72,6 +72,8 @@ class HighlightButton extends ComponentEx<IProps, IComponentState> {
       'highlight-home',
       'highlight-person',
       'highlight-visuals',
+      'highlight-tool',
+      'highlight-ui',
       'highlight'];
 
     const popoverBottom = this.state.showOverlay ? (
