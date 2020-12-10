@@ -1,6 +1,11 @@
 import HighlightButton from './views/HighlightButton';
 import TextareaNotes from './views/TextareaNotes';
 
+import { setSelectedMods } from './actions/session';
+import { sessionReducer } from './reducers/session';
+
+import HighlightIconBar from './views/HighlightIconBar';
+
 import * as path from 'path';
 import * as React from 'react';
 import { selectors, tooltip, types, util } from 'vortex-api';
@@ -48,6 +53,20 @@ function init(context: types.IExtensionContext) {
     isSortable: true,
     isDefaultVisible: false,
   });
+  context.registerReducer(['session', 'modhighlight'], sessionReducer);
+  context.registerAction('mods-multirow-actions', 300, HighlightIconBar, {}, undefined,
+    instanceIds => {
+      const state = context.api.store.getState();
+      const profile = selectors.activeProfile(state);
+      if (profile !== undefined) {
+        const mods = util.getSafe(state, ['persistent', 'mods', profile.gameId], {});
+        const selectedMods = Object.keys(mods)
+          .filter(key => instanceIds.includes(key) && mods[key].state === 'installed')
+          .map(key => mods[key]);
+        context.api.store.dispatch(setSelectedMods(selectedMods));
+      }
+      return true;
+    });
 
   context.once(() => {
     context.api.setStylesheet('mod-highlight', path.join(__dirname, 'mod-highlight.scss'));
