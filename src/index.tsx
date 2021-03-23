@@ -11,6 +11,7 @@ import * as React from 'react';
 import { selectors, tooltip, types, util } from 'vortex-api';
 
 function init(context: types.IExtensionContext) {
+  context.registerReducer(['session', 'modhighlight'], sessionReducer);
   context.registerTableAttribute('mods', {
     id: 'notes',
     description: 'Mod Notes',
@@ -53,7 +54,6 @@ function init(context: types.IExtensionContext) {
     isSortable: true,
     isDefaultVisible: false,
   });
-  context.registerReducer(['session', 'modhighlight'], sessionReducer);
   context.registerAction('mods-multirow-actions', 300, HighlightIconBar, {}, undefined,
     instanceIds => {
       const state = context.api.store.getState();
