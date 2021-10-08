@@ -11,8 +11,8 @@ export interface IBaseConnectedProps {
 }
 
 export interface IPopoverProps {
-  toggleColors: (any) => void;
-  toggleIcons: (any) => void;
+  toggleColors: (evt: any) => void;
+  toggleIcons: (evt: any) => void;
 }
 
 export class HighlightBase<P, S extends object> extends ComponentEx<P, S> {
@@ -75,7 +75,7 @@ export class HighlightBase<P, S extends object> extends ComponentEx<P, S> {
     this.mRef = ref;
   }
 
-  protected get bounds(): ClientRect {
+  protected get bounds(): DOMRect {
     return {
       top: 0,
       left: 0,
@@ -83,7 +83,7 @@ export class HighlightBase<P, S extends object> extends ComponentEx<P, S> {
       right: window.innerWidth,
       height: window.innerHeight,
       width: window.innerWidth,
-    };
+    } as any;
   }
 }
 
