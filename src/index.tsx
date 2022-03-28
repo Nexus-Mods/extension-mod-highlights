@@ -61,8 +61,7 @@ function init(context: types.IExtensionContext) {
       if (profile !== undefined) {
         const mods = util.getSafe(state, ['persistent', 'mods', profile.gameId], {});
         const selectedMods = Object.keys(mods)
-          .filter(key => instanceIds.includes(key) && mods[key].state === 'installed')
-          .map(key => mods[key]);
+          .filter(key => instanceIds.includes(key) && mods[key].state === 'installed');
         context.api.store.dispatch(setSelectedMods(selectedMods));
       }
       return true;

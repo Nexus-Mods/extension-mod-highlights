@@ -5,4 +5,4 @@ export const setDisplayBatchHighlight = createAction('SET_DISPLAY_BATCH_HIGHLIGH
   (display: boolean) => display);
 
 export const setSelectedMods = createAction('SET_HIGHLIGHTER_SELECTED_MODS',
-  (selectedMods: types.IMod[]) => selectedMods);
+  (selectedMods: string[]) => selectedMods);
